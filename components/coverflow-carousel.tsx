@@ -31,32 +31,18 @@ export function CoverflowCarousel() {
         {cards.map((card, index) => {
           const offset = index - activeIndex;
           const isCenter = offset === 0;
-          const isLeft = offset < 0;
-          const isRight = offset > 0;
 
-          let rotateY = 0;
-          let translateX = 0;
-          let translateZ = 0;
-          let zIndex = 50 - Math.abs(offset);
-          let opacity = 1;
-
-          // Classic Coverflow Math
-          if (isCenter) {
-            rotateY = 0;
-            translateX = 0;
-            translateZ = 150;
-            opacity = 1;
-          } else if (isLeft) {
-            rotateY = 55;
-            translateX = -140 + offset * 60;
-            translateZ = -100 - Math.abs(offset) * 60;
-            opacity = 1 - Math.abs(offset) * 0.15;
-          } else if (isRight) {
-            rotateY = -55;
-            translateX = 140 + offset * 60;
-            translateZ = -100 - Math.abs(offset) * 60;
-            opacity = 1 - Math.abs(offset) * 0.15;
-          }
+          // Circular Curve Math
+          const radius = 800; // Adjust for curve flatness (larger = flatter)
+          const anglePerCard = 20; // Degrees between each card
+          const angleRad = (offset * anglePerCard * Math.PI) / 180;
+          
+          const translateX = radius * Math.sin(angleRad);
+          const translateZ = radius * Math.cos(angleRad) - radius;
+          const rotateY = -(offset * anglePerCard);
+          
+          const zIndex = 50 - Math.abs(offset);
+          const opacity = 1 - Math.abs(offset) * 0.15;
 
           return (
             <motion.div
