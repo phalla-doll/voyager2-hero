@@ -55,6 +55,21 @@ export function PortfolioCarousel() {
 
   return (
     <section className="bg-[#050505] min-h-screen py-24 relative flex flex-col justify-center overflow-hidden">
+      {/* Hero Title Area */}
+      <div className="w-full px-4 md:px-12 flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-6">
+        <div className="flex flex-col gap-3">
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-sans font-light tracking-tight text-white uppercase">
+            Francesco Gioia
+          </h2>
+          <p className="text-white/50 text-xs md:text-sm font-sans tracking-[0.2em] uppercase">
+            Selected Works &mdash; 2026
+          </p>
+        </div>
+        <p className="text-white/60 max-w-sm text-sm md:text-base font-sans font-light leading-relaxed md:pb-2">
+          Documenting the subtle poetry of everyday life through street photography and visual storytelling.
+        </p>
+      </div>
+
       <div 
         ref={scrollRef}
         className="flex gap-6 md:gap-10 overflow-x-auto snap-x snap-mandatory scrollbar-hide px-4 md:px-12 pb-12 md:pb-32"
