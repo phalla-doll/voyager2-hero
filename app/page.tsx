@@ -1,5 +1,6 @@
 import { VoyagerCarousel } from '@/components/voyager-carousel';
 import { PortfolioCarousel } from '@/components/portfolio-carousel';
+import { EyewearCarousel } from '@/components/eyewear-carousel';
 
 export default function Page() {
   return (
@@ -12,6 +13,13 @@ export default function Page() {
       </div>
       
       <PortfolioCarousel />
+
+      {/* Divider */}
+      <div className="w-full max-w-[1800px] mx-auto px-8">
+        <div className="w-full h-px bg-white/10" />
+      </div>
+
+      <EyewearCarousel />
     </main>
   );
 }
