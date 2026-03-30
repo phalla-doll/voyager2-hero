@@ -19,15 +19,24 @@ export function EyewearCarousel() {
   return (
     <section className="relative min-h-screen bg-[#050505] flex flex-col items-center justify-center overflow-hidden py-24">
       {/* Dynamic Blurred Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-700">
-        <Image
-          key={activeIndex} // Force re-render for smooth crossfade if we wanted, but motion is better. We'll just let Next.js handle the src swap.
-          src={images[activeIndex].src}
-          alt="Background blur"
-          fill
-          className="object-cover opacity-30 blur-[120px] scale-150 transition-all duration-1000"
-          referrerPolicy="no-referrer"
-        />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {images.map((img, index) => (
+          <motion.div
+            key={img.id}
+            className="absolute inset-0"
+            initial={false}
+            animate={{ opacity: activeIndex === index ? 0.3 : 0 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+          >
+            <Image
+              src={img.src}
+              alt="Background blur"
+              fill
+              className="object-cover blur-[120px] scale-150"
+              referrerPolicy="no-referrer"
+            />
+          </motion.div>
+        ))}
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
@@ -43,12 +52,12 @@ export function EyewearCarousel() {
           const isCenter = offset === 0;
 
           // Arch math
-          const rotateZ = offset * 8;
-          const translateY = Math.abs(offset) * 35;
-          const translateX = offset * 140; // Overlap amount
-          const scale = 1 - Math.abs(offset) * 0.12;
+          const rotateZ = offset * 12;
+          const translateY = Math.abs(offset) * 45;
+          const translateX = offset * 160; // Overlap amount
+          const scale = 1 - Math.abs(offset) * 0.15;
           const zIndex = 50 - Math.abs(offset);
-          const opacity = 1 - Math.abs(offset) * 0.25;
+          const opacity = 1 - Math.abs(offset) * 0.2;
 
           return (
             <motion.div
@@ -63,7 +72,7 @@ export function EyewearCarousel() {
                 zIndex,
                 opacity,
               }}
-              transition={{ type: "spring", stiffness: 260, damping: 30, mass: 0.8 }}
+              transition={{ type: "spring", stiffness: 200, damping: 25, mass: 0.8 }}
               onClick={() => setActiveIndex(index)}
             >
               <div className="w-full h-full relative">
@@ -93,10 +102,10 @@ export function EyewearCarousel() {
           Eyewear That Stands Out
         </h2>
         
-        <button className="group flex items-center gap-4 bg-white text-black pl-6 pr-2 py-2 rounded-full font-medium hover:bg-gray-100 transition-colors shadow-[0_0_40px_rgba(255,255,255,0.1)]">
-          <span className="text-sm font-semibold tracking-wide">Enter Store</span>
-          <div className="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center group-hover:translate-x-1 transition-transform">
-            <ArrowRight size={18} strokeWidth={2} />
+        <button className="group flex items-center gap-3 bg-white text-black pl-5 pr-1.5 py-1.5 rounded-full hover:bg-gray-100 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+          <span className="text-sm font-normal tracking-wide">Enter Store</span>
+          <div className="bg-black text-white w-8 h-8 rounded-full flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+            <ArrowRight size={14} strokeWidth={1.5} />
           </div>
         </button>
       </div>
