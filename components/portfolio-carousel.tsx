@@ -10,31 +10,31 @@ const portfolios = [
     id: 1,
     title: "NOTES ON VISION",
     images: "12 IMAGES",
-    src: "https://picsum.photos/seed/trumpet/800/1000",
+    src: "https://picsum.photos/id/1018/800/1000",
   },
   {
     id: 2,
     title: "UNDESIGNATED",
     images: "09 IMAGES",
-    src: "https://picsum.photos/seed/smoking/800/1000",
+    src: "https://picsum.photos/id/1015/800/1000",
   },
   {
     id: 3,
     title: "FLORENCE",
     images: "20 IMAGES",
-    src: "https://picsum.photos/seed/hoodie/800/1000",
+    src: "https://picsum.photos/id/1019/800/1000",
   },
   {
     id: 4,
     title: "COHERENCE",
     images: "15 IMAGES",
-    src: "https://picsum.photos/seed/bluewall/800/1000",
+    src: "https://picsum.photos/id/1016/800/1000",
   },
   {
     id: 5,
     title: "WESTERN",
     images: "10 IMAGES",
-    src: "https://picsum.photos/seed/western/800/1000",
+    src: "https://picsum.photos/id/1025/800/1000",
   }
 ];
 
@@ -70,7 +70,7 @@ export function PortfolioCarousel() {
           >
             <div className="aspect-[4/5] relative overflow-hidden bg-white/5">
               <motion.div
-                className="w-full h-full"
+                className="w-full h-full relative"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
               >
