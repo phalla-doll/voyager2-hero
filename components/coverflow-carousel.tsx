@@ -31,18 +31,22 @@ export function CoverflowCarousel() {
         {cards.map((card, index) => {
           const offset = index - activeIndex;
           const isCenter = offset === 0;
-
-          // Circular Curve Math
-          const radius = 800; // Adjust for curve flatness (larger = flatter)
-          const anglePerCard = 20; // Degrees between each card
-          const angleRad = (offset * anglePerCard * Math.PI) / 180;
+          const absOffset = Math.abs(offset);
           
-          const translateX = radius * Math.sin(angleRad);
-          const translateZ = radius * Math.cos(angleRad) - radius;
-          const rotateY = -(offset * anglePerCard);
+          // Circular Stacking Math (Viewer outside the circle)
+          const rotateY = -offset * 35; // Angle cards outward to form a cylinder
           
-          const zIndex = 50 - Math.abs(offset);
-          const opacity = 1 - Math.abs(offset) * 0.15;
+          // Non-linear X translation for circular compression and tight stacking
+          let translateX = 0;
+          if (absOffset > 0) {
+            translateX = Math.sign(offset) * (140 + (absOffset - 1) * 100);
+          }
+          
+          // Sharp Z translation to make the center card prominently the largest
+          const translateZ = -absOffset * 400; 
+          
+          const zIndex = 50 - absOffset;
+          const opacity = isCenter ? 1 : 1 - absOffset * 0.2;
 
           return (
             <motion.div
